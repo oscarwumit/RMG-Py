@@ -58,8 +58,8 @@ cdef class SurfaceReactor(ReactionSystem):
     cdef public dict initialSurfaceCoverages
     cdef public ScalarQuantity surfaceVolumeRatio
     cdef public ScalarQuantity surfaceSiteDensity
-    cdef public numpy.ndarray surfaceReactions
-    cdef public numpy.ndarray surfaceSpecies
+    cdef public numpy.ndarray reactionsOnSurface # (catalyst surface, not core/edge surface)
+    cdef public numpy.ndarray speciesOnSurface # (catalyst surface, not core/edge surface)
 
     def __init__(self, 
                  T, 
@@ -285,15 +285,15 @@ cdef class SurfaceReactor(ReactionSystem):
         edgeReactionRates = numpy.zeros_like(self.edgeReactionRates)
         networkLeakRates = numpy.zeros_like(self.networkLeakRates)
         
-        surfaceReactions = self.surfaceReactions
-        surfaceSpecies = self.surfaceSpecies
+        reactionsOnSurface = self.reactionsOnSurface
+        speciesOnSurface = self.speciesOnSurface
         surfaceVolumeRatio_si = self.surfaceVolumeRatio.value_si
 
         C = numpy.zeros_like(self.coreSpeciesConcentrations)
         V =  self.V # constant volume reactor
 
         for j in xrange(numCoreSpecies):
-            if surfaceSpecies[j]:
+            if speciesOnSurface[j]:
                 C[j] = (N[j] / V) / surfaceVolumeRatio_si
             else:
                 C[j] = N[j] / V
