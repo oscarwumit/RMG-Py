@@ -1077,6 +1077,38 @@ class Molecule(Graph):
             numRadicals += atom.radicalElectrons
         return numRadicals
     
+    def getGasCopiesOfSurfaceMolecule(self):
+        """
+        Create an iterable of gas-phase (desorbed) copies of a surface-bound molecule.
+        
+        This will likely be a radical, because of the dangling bond which used
+        to be to the surface. It's a list because we don't know which electronic 
+        state to return, e.g. two radicals or a lone pair when a "double-bond" 
+        desorbs, so we return both in an iterable.
+        """
+        mol = cython.declare(Molecule)
+        mol = self.copy(deep=True)
+        toDelete = []
+        for atom in mol.atoms:
+            if atom.element.symbol=='X':
+                toDelete.append(atom)
+        for atom in toDelete:
+            for bonded, bond in atom.bonds.iteritems():
+                if bond.isSingle():
+                    bonded.incrementRadical()
+                elif bond.isDouble():
+                    bonded.incrementRadical()
+                    bonded.incrementRadical()
+                elif bond.isTriple():
+                    bonded.incrementRadical()
+                    bonded.incrementLonePairs()
+                elif bond.isQuadruple():
+                    bonded.incrementLonePairs()
+                    bonded.incrementLonePairs()
+            mol.removeAtom(atom)
+        raise NotImplementedError("Code not finished?")
+            
+
     def copy(self, deep=False):
         """
         Create a copy of the current graph. If `deep` is ``True``, a deep copy
@@ -1605,10 +1637,7 @@ class Molecule(Graph):
         and removes Hydrogen atoms.
         """
 
-        if self.containsSurfaceSite():
-            pass
-        else:
-            return translator.toSMILES(self)
+        return translator.toSMILES(self)
 
     def toRDKitMol(self, *args, **kwargs):
         """
@@ -1904,13 +1933,13 @@ class Molecule(Graph):
         """
         cython.declare(atom1=Atom, atom2=Atom, bond12=Bond, order=float)
         for atom1 in self.vertices:
-            if not atom1.isHydrogen():
+            if atom1.isHydrogen() or atom1.isSurfaceSite():
+                atom1.lonePairs = 0
+            else:
                 order = atom1.getBondOrdersForAtom()
                 atom1.lonePairs = (elements.PeriodicSystem.valence_electrons[atom1.symbol] - atom1.radicalElectrons - atom1.charge - int(order)) / 2.0
                 if atom1.lonePairs % 1 > 0 or atom1.lonePairs > 4:
                     logging.error("Unable to determine the number of lone pairs for element {0} in {1}".format(atom1,self))
-            else:
-                atom1.lonePairs = 0
                 
     def getNetCharge(self):
         """

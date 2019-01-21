@@ -35,6 +35,7 @@ adjacency list format used by Reaction Mechanism Generator (RMG).
 import logging
 import warnings
 import re
+import numpy as np
 from .molecule import Atom, Bond, getAtomType
 from .group import GroupAtom, GroupBond
 from .element import getElement, PeriodicSystem
