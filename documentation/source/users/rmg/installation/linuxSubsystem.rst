@@ -36,8 +36,9 @@ of ``Anaconda2-2018.12-Linux-x86_64.sh`` to match the name of the script you dow
     bash Anaconda2-2018.12-Linux-x86_64.sh
 
 Install the anaconda2 folder inside your home directory (it should be the default location when it asks for a location
-to install). **When prompted to append Anaconda to your PATH, select or type Yes**. You do NOT need to install Microsoft
-VSCode.
+to install). **When prompted to append Anaconda to your PATH, select or type Yes**. When prompted, do NOT install
+Microsoft VSCode. If you are interested in this lightweight IDE then you will want to install this into Windows 10
+instead of inside the linux subsystem.
 
 4. Execute the following commands to make sure that all of the required packages in Ubuntu are also installed: ::
 
