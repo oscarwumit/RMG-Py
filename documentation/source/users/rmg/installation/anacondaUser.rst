@@ -10,10 +10,9 @@ Binary Installation Using Anaconda for Unix-Based Systems: Linux and Mac OSX
 The download will be a .sh file with a name like ``Anaconda2-2018.12-Linux-x86_64.sh``. Open a terminal in the same
 directory as this file, and type the following to install Anaconda (replace the name of your .sh file below). ::
 
-    chmod 744 Anaconda2-2018.12-Linux-x86_64.sh
-    ./Anaconda2-2018.12-Linux-x86_64.sh
+    bash Anaconda2-2018.12-Linux-x86_64.sh
 
-**When prompted to append Anaconda to your PATH, select or type Yes**.  Install the Anaconda folder inside your home directory (typically ``/home/YourUsername/`` in Linux and ``/Users/YourUsername`` in Mac). You do NOT need to install Microsoft VSCode.
+**When prompted to append Anaconda to your PATH, select or type Yes**.  Install the Anaconda folder inside your home directory (typically ``/home/YourUsername/`` in Linux and ``/Users/YourUsername`` in Mac). When prompted, You do NOT need to install Microsoft VSCode (but feel free to if you are looking for a lightweight IDE).
 
 * Install both RMG and the RMG-database binaries through the Terminal.   Dependencies will be installed automatically. It is safest to make a new Anaconda environment for RMG and its dependencies. Type the following command into the Terminal to create the new environment named 'rmg_env' containing the latest stable version of the RMG program and its database. ::
 
