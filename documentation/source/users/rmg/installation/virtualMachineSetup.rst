@@ -12,10 +12,13 @@ this feature has been disabled in your BIOS settings. If this is the case, then 
 in your BIOS settings.
 
 First, check to see if virtualization technology is currently enabled on your computer by opening the Task Manager in
-Windows. Click on the ``Performance`` tab--from here you can see if virtualization technology is enabled.
+Windows 8/10. Click on the ``Performance`` tab--from here you can see if virtualization technology is enabled.
 
 .. image:: images/Virtualization_Enabled.png
     :align: center
+
+For Windows 7 or earlier you can download and run
+`Microsoft's Virtualization Detection Tool <http://www.microsoft.com/en-us/download/details.aspx?id=592>`_.
 
 If enabled, you can continue on with installing a virtual machine on your PC. If virtualization is currently disabled,
 though, you will have to enable this from the BIOS setting on your computer. How to do this varies from PC to PC (we
@@ -25,7 +28,8 @@ basic steps are as follows:
 1. Restart the PC. As soon as the PC turns back on, enter the BIOS settings (this usually involves pressing the ``F2``
 or ``F12`` keys, but will depend on your make/model). If you see the computer loading Windows then you have missed the
 opportunity, and should restart the PC to try again. If Secure Boot is enabled on your PC then there may be additional
-steps to reaching the BIOS settings.
+steps to reaching the BIOS settings (for example see these `instructions
+<https://www.laptopmag.com/articles/access-bios-windows-10>`_).
 
 2. From the BIOS settings, find the section on virtualization, and enable the virtualization technology. Save these
 changes and restart the PC.
@@ -35,7 +39,7 @@ For more information, please see online tutorials like
 
 **Note that changing your BIOS settings can be risky, so follow online tutorials carefully**. If you are unsure of what
 to do even after looking for online tutorials, consider following the instructions for installing RMG inside the Linux
-subsystem in Windows.
+subsystem in Windows 10 (:ref:`linuxSubsystem`)
 
 
 Downloading a Linux .iso File
