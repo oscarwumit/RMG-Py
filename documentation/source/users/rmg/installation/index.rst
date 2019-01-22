@@ -28,7 +28,7 @@ RMG in the Ubuntu subsystem now available on Windows 10.
     :maxdepth: 1
 
     virtualMachineSetup
-    ubuntuSubsystem
+    linuxSubsystem
 
 
 For Basic Users: Binary Installation Using Anaconda

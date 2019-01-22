@@ -1,22 +1,29 @@
-.. _ubuntuSubsystem:
+.. _linuxSubsystem:
 
 *****************************************************
-Installing RMG in the Ubuntu Subsystem on Windows 10
+Installing RMG in the Linux Subsystem on Windows 10
 *****************************************************
 
-Installing the Ubuntu Subsystem
+Requirements
+==============
+
+In order to install the Linux Subsystem, you need to be running Windows 10 build 16215 or later. The build can be
+determined from the "About" tab in the system settings (see the "OS build" line).
+
+Installing the Linux Subsystem
 ===================================
 
-1. Follow the instructions provided by Microsoft to install the Ubuntu subsystem, available `here
+1. Follow the instructions provided by Microsoft to install the Linux subsystem, available `here
 <https://docs.microsoft.com/en-us/windows/wsl/install-win10>`_. The basic steps include enabling the Windows Linux
 subsystem from a powershell **run as an administrator**, and downloading the latest LTS version of Ubuntu
-*from the Windows store*. We highly recommend Ubuntu over the other Linux distros, as Ubuntu is used by many of the
-RMG developers.
+*from the Windows store*. We recommend Ubuntu (for which these instructions were made) over the other Linux
+distributions.
 
-2. Once the Ubuntu subsystem is installed, open an Ubuntu terminal. Open a web browser in Windows and go to the
+2. Once the Linux subsystem is installed, open a web browser in Windows and go to the
 `Anaconda Python Platform Downloads Page <https://www.anaconda.com/download/#linux>`_. Go to the tab for the
-**Linux Installer**, and **right click** on the download icon for Python 2.7 to copy the link location. Paste this link
-into the Ubuntu terminal immediately after the ``wget`` command, so that your terminal looks like the following: ::
+**Linux Installer**, and **right click** on the download icon for Python 2.7 to copy the link location. Open an Ubuntu
+terminal (type in ``Ubuntu`` into the Windows search bar if you are unsure where to find it) and paste the link
+into the terminal immediately after typing the ``wget`` command, so that your terminal looks like the following: ::
 
     wget https://repo.continuum.io/archive/Anaconda2-2018.12-Linux-x86_64.sh
 
@@ -26,8 +33,7 @@ command in the terminal to begin downloading the installer.
 3. Once the Anaconda installer has downloaded, execute the following commands in the Ubuntu terminal, changing the name
 of ``Anaconda2-2018.12-Linux-x86_64.sh`` to match the name of the script you downloaded. ::
 
-    chmod 744 Anaconda2-2018.12-Linux-x86_64.sh
-    ./Anaconda2-2018.12-Linux-x86_64.sh
+    bash Anaconda2-2018.12-Linux-x86_64.sh
 
 Install the anaconda2 folder inside your home directory (it should be the default location when it asks for a location
 to install). **When prompted to append Anaconda to your PATH, select or type Yes**. You do NOT need to install Microsoft
@@ -40,4 +46,5 @@ VSCode.
     sudo apt install make
     sudo apt-get install libxrender1
 
-5. Follow the instructions for either the binary or source installation for the Linux Operating system.
+5. Follow the instructions for either the binary (:ref:`anacondaUser`) or source installation (:ref:`anacondaDeveloper`)
+for the Linux Operating system. Follow these instructions from the point directly after installing Anaconda.
