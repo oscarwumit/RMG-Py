@@ -55,9 +55,9 @@ cdef class RMGObject(object):
             if val is not None and not callable(val) and val != '':
                 output_dict[attr] = val
         for key, val in output_dict.iteritems():
-            if isinstance(val, list) and isinstance(val[0], RMGObject):
+            if isinstance(val, list) and val and isinstance(val[0], RMGObject):
                 output_dict[key] = [v.as_dict() for v in val]
-            elif not isinstance(val, (int, float, str, dict)):
+            elif not isinstance(val, (int, float, str, dict)) and val:
                 if isinstance(val, np.ndarray):
                     output_dict[key] = val.tolist()
                 else:
@@ -83,7 +83,7 @@ cdef class RMGObject(object):
                 obj.make_object(val, class_dict)
                 logging.debug("made object {0}".format(class_name))
                 data[key] = obj
-            elif isinstance(val, list) and isinstance(val[0], dict) and 'class' in val[0]:
+            elif isinstance(val, list) and val and isinstance(val[0], dict) and 'class' in val[0]:
                 # Call make_object to make a list of objects within the parent object (as in Conformer.Modes)
                 data[key] = list()
                 for entry in val:
