@@ -966,12 +966,14 @@ class Reaction:
             productChlorines  = [sum([1 for atom in  product.molecule[0].atoms if atom.isChlorine()]) for product  in products ]
             reactantIodines   = [sum([1 for atom in reactant.molecule[0].atoms if atom.isIodine()]) for reactant in reactants]
             productIodines    = [sum([1 for atom in  product.molecule[0].atoms if atom.isIodine()]) for product  in products ]
+            reactantFluorines = [sum([1 for atom in reactant.molecule[0].atoms if atom.isFluorine()]) for reactant in reactants]
+            productFluorines  = [sum([1 for atom in  product.molecule[0].atoms if atom.isFluorine()]) for product  in products ]
             
             # Sort the reactants and products by C/O/N/S numbers
-            reactants = [(carbon, oxygen, nitrogen, silicon, sulfur, chlorine, iodine, reactant) for carbon, oxygen, nitrogen, silicon, sulfur, chlorine, iodine, reactant
+            reactants = [(carbon, oxygen, nitrogen, silicon, sulfur, chlorine, iodine, fluorine, reactant) for carbon, oxygen, nitrogen, silicon, sulfur, chlorine, iodine, reactant
                          in zip(reactantCarbons,reactantOxygens,reactantNitrogens,reactantSilicons,reactantSulfurs,reactantChlorines, reactantIodines, reactants)]
             reactants.sort()
-            products = [(carbon, oxygen, nitrogen, silicon, sulfur, chlorine, iodine, product) for carbon, oxygen, nitrogen, silicon, sulfur, chlorine, iodine, product
+            products = [(carbon, oxygen, nitrogen, silicon, sulfur, chlorine, iodine, fluorine, product) for carbon, oxygen, nitrogen, silicon, sulfur, chlorine, iodine, product
                         in zip(productCarbons,productOxygens,productNitrogens,productSilicons,productSulfurs,productChlorines, productIodines, products)]
             products.sort()
             
