@@ -809,7 +809,7 @@ class SolvationDatabase(object):
                     and not any([atom.atomType.label == 'C2tc' for atom in saturatedStruct.atoms])):  # and is not [C-]#[O+]
                 saturatedStruct, addedToPairs = self.transformLonePairs(saturatedStruct)
         except AtomTypeError:
-            logging.warning('Species {spec} failed with lone pair hbi'.format(spec=molecule.toSMILES()))
+            logging.warning('failed to find abraham parameters for species {spec}'.format(spec=molecule.toSMILES()))
             pass
 
         # Now saturate radicals with H
