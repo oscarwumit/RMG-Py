@@ -803,9 +803,14 @@ class SolvationDatabase(object):
         # Convert lone pairs to radicals, then saturate with H.
 
         # Change lone pairs to radicals based on valency
-        if (sum([atom.lonePairs for atom in saturatedStruct.atoms]) > 0  # molecule contains lone pairs
-                and not any([atom.atomType.label == 'C2tc' for atom in saturatedStruct.atoms])):  # and is not [C-]#[O+]
-            saturatedStruct, addedToPairs = self.transformLonePairs(saturatedStruct)
+        from rmgpy.exceptions import AtomTypeError
+        try:
+            if (sum([atom.lonePairs for atom in saturatedStruct.atoms]) > 0  # molecule contains lone pairs
+                    and not any([atom.atomType.label == 'C2tc' for atom in saturatedStruct.atoms])):  # and is not [C-]#[O+]
+                saturatedStruct, addedToPairs = self.transformLonePairs(saturatedStruct)
+        except AtomTypeError:
+            logging.warning('Species {spec} failed with lone pair hbi'.format(spec=molecule.toSMILES()))
+            pass
 
         # Now saturate radicals with H
         if sum([atom.radicalElectrons for atom in saturatedStruct.atoms]) > 0: # radical species
